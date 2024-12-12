@@ -1,22 +1,21 @@
 import { NgModule } from '@angular/core';
-import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
+import { UsuariosComponent } from './usuarios/usuarios.component'; // Importa el componente
 
 const routes: Routes = [
   {
-    path: 'home',
-    loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
+    path: 'usuarios',
+    component: UsuariosComponent // Aquí usa el nombre correcto del componente
   },
   {
     path: '',
-    redirectTo: 'home',
+    redirectTo: 'usuarios',
     pathMatch: 'full'
-  },
+  }
 ];
 
 @NgModule({
-  imports: [
-    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })
-  ],
+  imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

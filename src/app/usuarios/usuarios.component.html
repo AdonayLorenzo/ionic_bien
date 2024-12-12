@@ -1,0 +1,74 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Usuarios</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <!-- Mensajes de éxito y error -->
+  <ion-item *ngIf="successMessage">
+    <ion-label color="success">{{ successMessage }}</ion-label>
+  </ion-item>
+  <ion-item *ngIf="errorMessage">
+    <ion-label color="danger">{{ errorMessage }}</ion-label>
+  </ion-item>
+
+  <!-- Formulario para crear o editar un usuario -->
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>{{ selectedUsuario ? 'Editar Usuario' : 'Crear Usuario' }}</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-item>
+        <ion-label position="floating">Nickname</ion-label>
+        <ion-input [(ngModel)]="newNickname" placeholder="Ingrese el nickname"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Email</ion-label>
+        <ion-input [(ngModel)]="newEmail" placeholder="Ingrese el email"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Contraseña</ion-label>
+        <ion-input [(ngModel)]="newPassword" placeholder="Ingrese la contraseña" type="password"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Fecha de nacimiento</ion-label>
+        <ion-input [(ngModel)]="newBirthdate" placeholder="Ingrese la fecha de nacimiento" type="date"></ion-input>
+      </ion-item>
+
+      <!-- Botones de acción -->
+      <div class="button-group">
+        <ion-button expand="block" color="primary" (click)="selectedUsuario ? updateUsuario() : createUsuario()">
+          {{ selectedUsuario ? 'Actualizar Usuario' : 'Crear Usuario' }}
+        </ion-button>
+        <ion-button *ngIf="selectedUsuario" expand="block" color="light" (click)="clearForm()">
+          Cancelar
+        </ion-button>
+      </div>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- Lista de usuarios -->
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Lista de Usuarios</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list>
+        <ion-item *ngFor="let usuario of usuarios" lines="full">
+          <ion-label>{{ usuario.nickname }} - {{ usuario.email }}</ion-label>
+          <ion-button slot="end" color="tertiary" (click)="selectUsuario(usuario)">
+            Editar
+          </ion-button>
+          <!-- Verificar si el id existe antes de permitir la eliminación -->
+          <ion-button *ngIf="usuario.id !== undefined" slot="end" color="danger" (click)="deleteUsuario(usuario.id)">
+            Eliminar
+          </ion-button>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
