@@ -1,0 +1,65 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Imágenes</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <!-- Mensajes de éxito y error -->
+  <ion-item *ngIf="successMessage">
+    <ion-label color="success">{{ successMessage }}</ion-label>
+  </ion-item>
+  <ion-item *ngIf="errorMessage">
+    <ion-label color="danger">{{ errorMessage }}</ion-label>
+  </ion-item>
+
+  <!-- Formulario para subir o actualizar una imagen -->
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>{{ imagenToUpdate ? 'Actualizar Imagen' : 'Subir Imagen' }}</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-item>
+        <ion-label position="floating">Biografía</ion-label>
+        <ion-input [(ngModel)]="biografia"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="stacked">Seleccionar Archivo</ion-label>
+        <input type="file" (change)="onFileChange($event)" />
+      </ion-item>
+      <ion-item>
+        <ion-label position="stacked">Usuario</ion-label>
+        <ion-select [(ngModel)]="selectedUsuarioId">
+          <ion-select-option *ngFor="let usuario of usuarios" [value]="usuario.id">
+            {{ usuario.nickname }}
+          </ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-button expand="block" color="primary" (click)="imagenToUpdate ? updateImagen() : uploadImagen()">
+        {{ imagenToUpdate ? 'Actualizar Imagen' : 'Subir Imagen' }}
+      </ion-button>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- Lista de imágenes -->
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Lista de Imágenes</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list>
+        <ion-item *ngFor="let imagen of imagenes" lines="full">
+          <ion-thumbnail slot="start">
+            <img [src]="'data:image/jpeg;base64,' + imagen.datos" />
+          </ion-thumbnail>
+          <ion-label>
+            <h2>{{ imagen.biografia }}</h2>
+            <p>{{ imagen.fechaSubida }}</p>
+          </ion-label>
+          <ion-button slot="end" color="danger" (click)="deleteImagen(imagen.id ? imagen.id : 0)">Eliminar</ion-button>
+          <ion-button slot="end" color="secondary" (click)="editImagen(imagen)">Editar</ion-button>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

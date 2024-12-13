@@ -7,11 +7,13 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';  // Importa FormsModule
 
 import { UsuariosComponent } from './usuarios/usuarios.component'; // Importa el componente
+import { ImagenesComponent } from './imagenes/imagenes.component'; // Importa ImagenesComponent
 
 @NgModule({
   declarations: [
     AppComponent,
-    UsuariosComponent
+    UsuariosComponent,
+    ImagenesComponent  // Asegúrate de agregar ImagenesComponent aquí
   ],
   imports: [
     BrowserModule,

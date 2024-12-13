@@ -22,6 +22,10 @@ export class UsuariosComponent {
 
   constructor(private usuarioService: UsuarioService) {}
 
+  ngOnInit() {
+    this.getUsuarios();
+  }
+
   // Método para crear un nuevo usuario
   createUsuario() {
     const usuarioData = {

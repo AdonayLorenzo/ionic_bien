@@ -1,21 +1,26 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { UsuariosComponent } from './usuarios/usuarios.component'; // Importa el componente
+import { UsuariosComponent } from './usuarios/usuarios.component'; // Importa el componente Usuarios
+import { ImagenesComponent } from './imagenes/imagenes.component'; // Importa el componente Imagenes
 
 const routes: Routes = [
   {
     path: 'usuarios',
-    component: UsuariosComponent // Aquí usa el nombre correcto del componente
+    component: UsuariosComponent, // Ruta para usuarios
+  },
+  {
+    path: 'imagenes',
+    component: ImagenesComponent, // Ruta para imágenes
   },
   {
     path: '',
     redirectTo: 'usuarios',
-    pathMatch: 'full'
-  }
+    pathMatch: 'full',
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
